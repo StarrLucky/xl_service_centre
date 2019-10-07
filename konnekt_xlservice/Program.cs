@@ -51,7 +51,7 @@ namespace konnekt_xlservice
 
             int i = 1;
 
-            NpgsqlConnection postgreconn = new NpgsqlConnection("Host=localhost;Username=postgres;Password=kurwa;Database=mydb10");
+            NpgsqlConnection postgreconn = new NpgsqlConnection("Host=localhost;Username=postgres;Password=Database_Password;Database=DatabaseName");
             postgreconn.Open();
 
             NpgsqlCommand cmddelete = new NpgsqlCommand("DELETE FROM repair *", postgreconn);
