@@ -18,7 +18,7 @@
 `queryString = "SELECT Basa.Kod, Client.Persona,  Phone.Name, Basa.PolomkaDesc, Basa.DataPrihod,  Basa.DataGotov, Basa.KodRepair FROM Basa, Phone, Client WHERE Basa.KodTel = Phone.Kod AND Basa.KodClient = Client.Kod AND Basa.kod>2000";`  
 где Basa.kod>2000  — выбор квитанций от номера 2000. Можно установить в 0, чтобы экспротировать все квитанции.
 
-* Подключение к нами созданной PostgreSQL базе данных, находящейся локально или на сервере,
+* Подключение к созданной ранее PostgreSQL базе данных, находящейся локально или на сервере,
 обновление которой (к сожалению, реализовано только обнуление, т.е. информация в базе данных на время импорта будет отсутствовать)
 и является результатом работы этой программы  
 `NpgsqlConnection postgreconn = new NpgsqlConnection("Host=localhost;Username=postgres;Password=kurwa;Database=mydb10");`  
