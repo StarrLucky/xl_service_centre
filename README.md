@@ -19,10 +19,13 @@
  > queryString = "SELECT Basa.Kod, Client.Persona,  Phone.Name, Basa.PolomkaDesc, Basa.DataPrihod,  Basa.DataGotov, Basa.KodRepair FROM Basa, Phone, Client WHERE Basa.KodTel = Phone.Kod AND Basa.KodClient = Client.Kod AND Basa.kod>2000";
  
  Basa.kod>2000  — выбор квитанций от номера 2000. Можно установить в 0, чтобы экспротировать все квитанции.
+ 
+ 
 2) Подключение к нами созданной PostgreSQL базе данных, находящейся локально или на сервере,
 обновление которой (к сожалению, реализовано только обнуление, т.е. информация в базе данных на время импорта будет отсутствовать)
 и является результатом работы этой программы
   > NpgsqlConnection postgreconn = new NpgsqlConnection("Host=localhost;Username=postgres;Password=kurwa;Database=mydb10");
+  
   localhost или ip сервера, на котором установлен postgresql, логин, пароль и имя базы данных, в которую происходит экспорт.
 
 Более тонкая настройка необходимых полей для экспорта в базу данных требует изменения/добавления части кода.
