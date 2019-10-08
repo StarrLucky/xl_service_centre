@@ -11,7 +11,7 @@
 В программе задействован таймер  
 `Timer t = new Timer(tm, null, 0, 900000);`  
 Через каждые 15 минут (900000мс) происходит:  
-* Подключение к базе данных программы сервисного центра с помощью драйвера Microsoft.Jet.OLEDB 
+* Подключение к базе данных программы сервисного центра с помощью драйвера Microsoft.Jet.OLEDB  
 В строке подключения необходимо изменить Source путь/имя к необходимой базе данных.  
 `myConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=база.vdb;Jet OLEDB:System Database=Pattern.mdw;User ID=Excel;Password=lj,thvfy";`  
 В строке запроса данные выбираются исходя из струкруты таблиц оригинальной БД программы XL Сервисный центр (https://yadi.sk/d/4Pj0zyF_ZX4DKA)  
