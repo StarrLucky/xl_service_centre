@@ -13,33 +13,22 @@ namespace konnekt_xlservice
     {
         static void Main(string[] args)
         {
-
             TimerCallback tm = new TimerCallback(Operate);
             Timer t = new Timer(tm, null, 0, 900000);
             Console.ReadLine();
-
         }
 
-
-
-
+        
         public static void Operate(object obj)
         {
-
             OleDbConnection myConn = new OleDbConnection();
             myConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=база.vdb;Jet OLEDB:System Database=Pattern.mdw;User ID=Excel;Password=lj,thvfy";
             string queryString = "SELECT Basa.Kod, Client.Persona,  Phone.Name, Basa.PolomkaDesc, Basa.DataPrihod,  Basa.DataGotov, Basa.KodRepair FROM Basa, Phone, Client WHERE Basa.KodTel = Phone.Kod AND Basa.KodClient = Client.Kod AND Basa.kod>2000";
-
-
+            
             ReadMyData(myConn.ConnectionString, queryString);
-
         }
       
-
-
-
-
-
+        
         public static void ReadMyData(string connectionString, string queryString)
         {
 
@@ -47,38 +36,31 @@ namespace konnekt_xlservice
             OleDbCommand olecommand = new OleDbCommand(queryString, oleconnection);
             oleconnection.Open();
             OleDbDataReader olereader = olecommand.ExecuteReader();
-
-
+            
             int i = 1;
-
+            
             NpgsqlConnection postgreconn = new NpgsqlConnection("Host=localhost;Username=postgres;Password=Database_Password;Database=DatabaseName");
             postgreconn.Open();
-
             NpgsqlCommand cmddelete = new NpgsqlCommand("DELETE FROM repair *", postgreconn);
             cmddelete.ExecuteNonQuery();
-
+            
 
             while (olereader.Read())
             {
 
                 Console.WriteLine(olereader.GetValue(0) +
                                      "  " + olereader.GetValue(1) +
-                                     "  " + olereader.GetValue(2) + "  " + olereader.GetValue(3) +
+                                     "  " + olereader.GetValue(2) + 
+                                     "  " + olereader.GetValue(3) +
                                      "  " + olereader.GetValue(4) +
                                      "  " + olereader.GetValue(5) +
                                      "  " + olereader.GetValue(6));
-
-
-
-
                 i++;
-
                 
-
                 NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO repair (id, kv, username, device, failure, acceptdate, readydate, repairstatus) VALUES (@id, @kv, @username, @device, @failure, @acceptdate, @readydate, @repairstatus)", postgreconn);
 
                 // Console.WriteLine(i);
-
+                
                 cmd.Parameters.AddWithValue("id", i);
 
                 //Basa.Kod, Client.Persona,  Phone.Name, Bas.PolomkaDesc, Basa.DataPrihod,  Basa.DataGotov, Basa.KodRepair 
@@ -113,7 +95,6 @@ namespace konnekt_xlservice
                 if (val == null || val.ToString().Equals("")) { val = "Информация отсутствует"; }
                 cmd.Parameters.AddWithValue("readydate", val);
 
-
                 val2 = olereader.GetValue(6);
                   switch(val2)
                 {
@@ -132,35 +113,17 @@ namespace konnekt_xlservice
                     default:
                         val = "Информация отсутствует";
                         break;
-
                 }
 
                 cmd.Parameters.AddWithValue("repairstatus", val);
                 cmd.ExecuteNonQuery();
-
-
-               
-
-
-
             }
-
 
             postgreconn.Close();
             oleconnection.Close();
             Console.ReadKey();
-
-
+            
         }
-
-
-
-
-
-
-
-
-
 
     }
 
