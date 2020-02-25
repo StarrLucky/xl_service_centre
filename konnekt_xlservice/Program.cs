@@ -23,7 +23,7 @@ namespace konnekt_xlservice
         {
             OleDbConnection myConn = new OleDbConnection();
             myConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=база.vdb;Jet OLEDB:System Database=Pattern.mdw;User ID=Excel;Password=lj,thvfy";
-            string queryString = "SELECT Basa.Kod, Client.Persona,  Phone.Name, Basa.PolomkaDesc, Basa.DataPrihod,  Basa.DataGotov, Basa.KodRepair FROM Basa, Phone, Client WHERE Basa.KodTel = Phone.Kod AND Basa.KodClient = Client.Kod AND Basa.kod>2000";
+            string queryString = "SELECT Basa.Kod, Client.Persona,  Phone.Name, Basa.PolomkaDesc, Basa.DataPrihod,  Basa.DataGotov, Basa.KodRepair FROM Basa, Phone, Client WHERE Basa.KodTel = Phone.Kod AND Basa.KodClient = Client.Kod AND Basa.kod>1";
             
             ReadMyData(myConn.ConnectionString, queryString);
         }
